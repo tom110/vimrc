@@ -24,14 +24,14 @@ call plug#begin('~/.vim/plugged')
 " 安装vim-plugin 
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " 安装命令PlugInstall!
-Plug 'connorholyday/vim-snazzy'
+" Plug 'connorholyday/vim-snazzy'
 " Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 " Taglist
 " Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 
 " Error checking
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " Auto Complete
 " Plug 'Valloric/YouCompleteMe'
@@ -81,4 +81,4 @@ Plug 'w0rp/ale'
 " Plug 'kana/vim-textobj-user'
 " Plug 'fadein/vim-FIGlet'
 call plug#end()
-color snazzy
+

@@ -21,7 +21,9 @@ set wrap
                             
 call plug#begin('~/.vim/plugged')
 
-" 安装vim-plugin curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" 安装vim-plugin 
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" 安装命令PlugInstall!
 Plug 'connorholyday/vim-snazzy'
 " Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 " Plug 'Xuyuanp/nerdtree-git-plugin'

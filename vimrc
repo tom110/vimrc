@@ -1,23 +1,35 @@
- " 自定义设
+" 自定义设
 exec "nohlsearch"
 map R :source $HOME/.vimrc<CR>
 map J <nop>
 map K <nop>
 map L :nohlsearch<CR>
 
-set laststatus=2
+" 状态栏显示方式
+set statusline=%2*%n%m%r%h%w%*\ %F\ %1*[FORMAT=%2*%{&ff}:%{&fenc!=''?&fenc:&enc}%1*]\ [TYPE=%2*%Y%1*]\ [COL=%2*%03v%1*]\ [ROW=%2*%03l%1*/%3*%L(%p%%)%1*]\
+" 显示行号
 set nu
+" 启动语法高亮
 syntax on
+" 显示行下划线
 set cursorline
+" 右下角显示指令输入
 set showcmd
+" 命令自动补全（tab键） 
 set wildmenu
+" 搜索高亮
 set hlsearch
+" 设置查找大小写不敏感
 set ignorecase
-set smartcase
+" 显示相对行号
 set relativenumber
+" 设置tab键等于4个空格
 set tabstop=4
+" 开启自动缩进
 set ai
+" 设置过长行自动折行
 set wrap
+
                             
 call plug#begin('~/.vim/plugged')
 

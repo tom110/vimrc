@@ -102,15 +102,15 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 " NERDTree-git-plugin相关设置
 let g:NERDTreeIndicatorMapCustom = {
-		\ "Modified" : "*",
-		\ "Staged"	 : "+",
-		\ "Untracked": "^",
-		\ "Renamed"  : "->",
-		\ "Unmerged" : "=",
-		\ "Deleted"  : "x",
-		\ "Dirty"	 : "X",
-		\ "Clean"    : "ok",
-		\ "Ignored"  : "Ig",
-		\ "Unknown"  : "?"
-		\}
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
 let g:NERDTreeShowIgnoredStatus = 1

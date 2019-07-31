@@ -37,8 +37,8 @@ call plug#begin('~/.vim/plugged')
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " 安装命令PlugInstall!
 " Plug 'connorholyday/vim-snazzy'
-" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-" Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " Taglist
 " Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 
@@ -93,4 +93,24 @@ call plug#begin('~/.vim/plugged')
 " Plug 'kana/vim-textobj-user'
 " Plug 'fadein/vim-FIGlet'
 call plug#end()
-
+" NERDTree相关设置
+map <F3> :NERDTreeMirror<CR>
+map <F3> :NERDTreeToggle<CR>
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" NERDTree-git-plugin相关设置
+let g:NERDTreeIndicatorMapCustom = {
+		\ "Modified" : "*",
+		\ "Staged"	 : "+",
+		\ "Untracked": "^",
+		\ "Renamed"  : "->",
+		\ "Unmerged" : "=",
+		\ "Deleted"  : "x",
+		\ "Dirty"	 : "X",
+		\ "Clean"    : "ok",
+		\ "Ignored"  : "Ig",
+		\ "Unknown"  : "?"
+		\}
+let g:NERDTreeShowIgnoredStatus = 1

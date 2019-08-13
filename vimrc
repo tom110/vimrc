@@ -61,6 +61,9 @@ Plug 'vim-scripts/indentpython.vim'
 
 Plug 'scrooloose/nerdcommenter' " in <space>cc to comment a line
 
+" translate
+Plug 'ianva/vim-youdao-translater'
+
 call plug#end()
 
 " NERDTree相关设置
@@ -109,4 +112,7 @@ augroup javascript_folding
     au FileType javascript setlocal foldmethod=syntax
 augroup END
 
-
+" translate
+vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+noremap <leader>yd :<C-u>Yde<CR>

@@ -4,6 +4,12 @@ map R :source $HOME/.vimrc<CR>
 map J <nop>
 map K <nop>
 map L :nohlsearch<CR>
+map s <nop>
+map S :w<CR>
+map ta :tabe<CR>
+map tl :+tabnext<CR>
+map th :-tabnext<CR>
+
 
 " 状态栏显示方式
 set statusline=%2*%n%m%r%h%w%*\ %F\ %1*[FORMAT=%2*%{&ff}:%{&fenc!=''?&fenc:&enc}%1*]\ [TYPE=%2*%Y%1*]\ [COL=%2*%03v%1*]\ [ROW=%2*%03l%1*/%3*%L(%p%%)%1*]\
@@ -52,7 +58,11 @@ set foldtext=NeatFoldText()
 call plug#begin('~/.vim/plugged')
 
 " 安装vim-plugin 
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" neovim 需要设置
+" $(~) ln -s ~/.vim .config/nvim
+" $(~) ln -s ~/.vimrc .config/nvim/init.vim
+" (vim)curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" (neovim) curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 " 安装命令PlugInstall!
 " Plug 'connorholyday/vim-snazzy'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -78,6 +88,10 @@ Plug 'scrooloose/nerdcommenter' " in <space>cc to comment a line
 
 " translate
 Plug 'ianva/vim-youdao-translater'
+
+" 语法查错
+Plug 'scrooloose/syntastic'
+
 
 call plug#end()
 
@@ -128,6 +142,26 @@ augroup javascript_folding
 augroup END
 
 " translate
-vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+vnoremap <leader>fy  :<C-u>Ydv<CR>
+nnoremap <leader>fy :<C-u>Ydc<CR>
 noremap <leader>yd :<C-u>Yde<CR>
+
+" 修改高亮的背景色, 适应主题
+highlight SyntasticErrorSign guifg=white guibg=black
+" to see error location list
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_loc_list_height = 5
+function! ToggleErrors()
+    let old_last_winnr = winnr('$')
+        lclose
+            if old_last_winnr == winnr('$')
+                " Nothing was closed, open syntastic error location panel
+                Errors
+            endif
+endfunction
+nnoremap <Leader>s :call ToggleErrors()<cr>
+nnoremap <Leader>sn :lnext<cr>
+nnoremap <Leader>sp :lprevious<cr>
+nnoremap <Leader>si :SyntasticInfo<cr>
+

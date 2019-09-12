@@ -92,6 +92,8 @@ Plug 'ianva/vim-youdao-translater'
 " 语法查错
 Plug 'scrooloose/syntastic'
 
+" typescript
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
@@ -152,6 +154,8 @@ highlight SyntasticErrorSign guifg=white guibg=black
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_loc_list_height = 5
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_typescript_checkers = ['eslint','tslint']
 function! ToggleErrors()
     let old_last_winnr = winnr('$')
         lclose

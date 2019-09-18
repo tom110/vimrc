@@ -6,10 +6,10 @@ map K <nop>
 map L :nohlsearch<CR>
 map s <nop>
 map S :w<CR>
+map q :q<CR>
 map ta :tabe<CR>
 map tl :+tabnext<CR>
 map th :-tabnext<CR>
-
 
 " 状态栏显示方式
 set statusline=%2*%n%m%r%h%w%*\ %F\ %1*[FORMAT=%2*%{&ff}:%{&fenc!=''?&fenc:&enc}%1*]\ [TYPE=%2*%Y%1*]\ [COL=%2*%03v%1*]\ [ROW=%2*%03l%1*/%3*%L(%p%%)%1*]\
@@ -95,24 +95,24 @@ Plug 'scrooloose/syntastic'
 " typescript
 Plug 'leafgarland/typescript-vim'
 
+" python自动补全
+" <leader>g 转到定义文档
+" <leader>d 转到定义
+" <leader>r 重命名变量
+" <leader>n 显示变量使用方法
+" :Pyimport <模块名> 打开模块
+" <C-n> 自动补全
+Plug 'davidhalter/jedi-vim'
+
 " ncm2
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-syntax' 
+Plug 'Shougo/neco-syntax'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-Plug 'ncm2/ncm2-github'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-tagprefix'
-Plug 'filipekiss/ncm2-look.vim'
-Plug 'ncm2/ncm2-gtags'
-Plug 'ncm2/ncm2-syntax'
-Plug 'ncm2/ncm2-neoinclude'
-Plug 'wellle/tmux-complete.vim'
-Plug 'yuki-ycino/ncm2-dictionary'
-Plug 'fgrsnau/ncm2-aspell'
-Plug 'loonies/ncm2-ledger'
 call plug#end()
 
 " NERDTree相关设置
@@ -192,7 +192,11 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
+let g:python3_host_prog='/data/data/com.termux/files/usr/bin/python3'
 inoremap <c-c> <ESC>
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" jedi相关配置
+let g:jedi#use_tabs_not_buffers=1

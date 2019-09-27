@@ -6,7 +6,7 @@ map K <nop>
 map L :nohlsearch<CR>
 map s <nop>
 map S :w<CR>
-map q :q<CR>
+map Q :q<CR>
 map ta :tabe<CR>
 map tl :+tabnext<CR>
 map th :-tabnext<CR>
@@ -29,8 +29,9 @@ set hlsearch
 set ignorecase
 " 显示相对行号
 set relativenumber
-" 设置tab键等于4个空格
-set tabstop=4
+" 设置tab键等于2个空格
+set ts=2
+set sw=4
 " 开启自动缩进
 set ai
 " 设置过长行自动折行

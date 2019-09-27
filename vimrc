@@ -106,6 +106,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'davidhalter/jedi-vim'
 
 " ncm2
+" 需要安装pkg install clang-> pip install pynvim-> pip install neovim
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'

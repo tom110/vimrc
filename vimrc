@@ -194,6 +194,7 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
+"非termux删除一下行
 let g:python3_host_prog='/data/data/com.termux/files/usr/bin/python3'
 inoremap <c-c> <ESC>
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")

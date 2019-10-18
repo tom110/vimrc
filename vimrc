@@ -21,7 +21,7 @@ syntax on
 set cursorline
 " 右下角显示指令输入
 set showcmd
-" 命令自动补全（tab键） 
+" 命令自动补全（tab键）
 set wildmenu
 " 搜索高亮
 set hlsearch
@@ -31,7 +31,7 @@ set ignorecase
 set relativenumber
 " 设置tab键等于2个空格
 set ts=2
-set sw=4
+set sw=2
 " 开启自动缩进
 set ai
 " 设置过长行自动折行
@@ -42,14 +42,14 @@ setlocal foldmethod=syntax
 :let mapleader = ','
 " 设置折叠样式
 function! NeatFoldText()
-    let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-    let lines_count = v:foldend - v:foldstart + 1
-    let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-    let foldchar = matchstr(&fillchars, 'fold:\zs.')
-    let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-    let foldtextend = lines_count_text . repeat(foldchar, 8)
-    let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-    return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+	let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+	let lines_count = v:foldend - v:foldstart + 1
+	let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+	let foldchar = matchstr(&fillchars, 'fold:\zs.')
+	let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+	let foldtextend = lines_count_text . repeat(foldchar, 8)
+	let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+	return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
 endfunction
 
 set foldtext=NeatFoldText()
@@ -58,7 +58,7 @@ set foldtext=NeatFoldText()
 
 call plug#begin('~/.vim/plugged')
 
-" 安装vim-plugin 
+" 安装vim-plugin
 " neovim 需要设置
 " $(~) ln -s ~/.vim .config/nvim
 " $(~) ln -s ~/.vimrc .config/nvim/init.vim
@@ -111,10 +111,15 @@ Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-syntax' 
+Plug 'ncm2/ncm2-syntax'
 Plug 'Shougo/neco-syntax'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
+
+" vim-autoformat
+Plug 'Chiel92/vim-autoformat'
+"语法高亮
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 " NERDTree相关设置
@@ -127,17 +132,17 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 " NERDTree-git-plugin相关设置
 let g:NERDTreeIndicatorMapCustom = {
-    \ "Modified"  : "✹",
-    \ "Staged"    : "✚",
-    \ "Untracked" : "✭",
-    \ "Renamed"   : "➜",
-    \ "Unmerged"  : "═",
-    \ "Deleted"   : "✖",
-    \ "Dirty"     : "✗",
-    \ "Clean"     : "✔︎",
-    \ 'Ignored'   : '☒',
-    \ "Unknown"   : "?"
-    \ }
+			\ "Modified"  : "✹",
+			\ "Staged"    : "✚",
+			\ "Untracked" : "✭",
+			\ "Renamed"   : "➜",
+			\ "Unmerged"  : "═",
+			\ "Deleted"   : "✖",
+			\ "Dirty"     : "✗",
+			\ "Clean"     : "✔︎",
+			\ 'Ignored'   : '☒',
+			\ "Unknown"   : "?"
+			\ }
 let g:NERDTreeShowIgnoredStatus = 1
 
 " ale
@@ -159,8 +164,8 @@ let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
 augroup javascript_folding
-    au!
-    au FileType javascript setlocal foldmethod=syntax
+	au!
+	au FileType javascript setlocal foldmethod=syntax
 augroup END
 
 " translate
@@ -177,12 +182,12 @@ let g:syntastic_loc_list_height = 5
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_typescript_checkers = ['eslint','tslint']
 function! ToggleErrors()
-    let old_last_winnr = winnr('$')
-        lclose
-            if old_last_winnr == winnr('$')
-                " Nothing was closed, open syntastic error location panel
-                Errors
-            endif
+	let old_last_winnr = winnr('$')
+	lclose
+	if old_last_winnr == winnr('$')
+		" Nothing was closed, open syntastic error location panel
+		Errors
+	endif
 endfunction
 nnoremap <Leader>s :call ToggleErrors()<cr>
 nnoremap <Leader>sn :lnext<cr>
@@ -194,7 +199,6 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 " IMPORTANT: :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 set shortmess+=c
-"非termux删除一下行
 let g:python3_host_prog='/data/data/com.termux/files/usr/bin/python3'
 inoremap <c-c> <ESC>
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
@@ -203,3 +207,6 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " jedi相关配置
 let g:jedi#use_tabs_not_buffers=1
+
+" vim-autoformat
+noremap <F4> :Autoformat<CR>

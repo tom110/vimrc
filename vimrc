@@ -13,10 +13,10 @@ map th :-tabnext<CR>
 
 " 状态栏显示方式
 set statusline=%2*%n%m%r%h%w%*\ %F\ %1*[FORMAT=%2*%{&ff}:%{&fenc!=''?&fenc:&enc}%1*]\ [TYPE=%2*%Y%1*]\ [COL=%2*%03v%1*]\ [ROW=%2*%03l%1*/%3*%L(%p%%)%1*]\
-" 显示行号
-set nu
 " 启动语法高亮
 syntax on
+" 显示行号
+set nu
 " 显示行下划线
 set cursorline
 " 右下角显示指令输入
@@ -27,8 +27,6 @@ set wildmenu
 set hlsearch
 " 设置查找大小写不敏感
 set ignorecase
-" 显示相对行号
-set relativenumber
 " 设置tab键等于2个空格
 set ts=2
 set sw=2
@@ -53,160 +51,3 @@ function! NeatFoldText()
 endfunction
 
 set foldtext=NeatFoldText()
-
-
-
-call plug#begin('~/.vim/plugged')
-
-" 安装vim-plugin
-" neovim 需要设置
-" $(~) ln -s ~/.vim .config/nvim
-" $(~) ln -s ~/.vimrc .config/nvim/init.vim
-" (vim)curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-" (neovim) curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-" 安装命令PlugInstall!
-" Plug 'connorholyday/vim-snazzy'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-
-" Undo Tree
-Plug 'mbbill/undotree/'
-
-" Other visual enhancement
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'itchyny/vim-cursorword'
-
-" HTML, CSS, JavaScript, PHP, JSON, etc.
-Plug 'elzr/vim-json'
-Plug 'gko/vim-coloresque', { 'for': ['vim-plug', 'php', 'html','javascript', 'css', 'less'] }
-Plug 'pangloss/vim-javascript', { 'for' :['javascript', 'vim-plug'] }
-
-" Python
-Plug 'vim-scripts/indentpython.vim'
-
-
-Plug 'scrooloose/nerdcommenter' " in <space>cc to comment a line
-
-" translate
-Plug 'ianva/vim-youdao-translater'
-
-" 语法查错
-Plug 'scrooloose/syntastic'
-
-" typescript
-Plug 'leafgarland/typescript-vim'
-
-" python自动补全
-" <leader>g 转到定义文档
-" <leader>d 转到定义
-" <leader>r 重命名变量
-" <leader>n 显示变量使用方法
-" :Pyimport <模块名> 打开模块
-" <C-n> 自动补全
-Plug 'davidhalter/jedi-vim'
-
-" ncm2
-" 需要安装pkg install clang-> pip install pynvim-> pip install neovim
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-syntax'
-Plug 'Shougo/neco-syntax'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
-
-" vim-autoformat
-Plug 'Chiel92/vim-autoformat'
-"语法高亮
-Plug 'sheerun/vim-polyglot'
-call plug#end()
-
-" NERDTree相关设置
-map <F3> :NERDTreeMirror<CR>
-map <F3> :NERDTreeToggle<CR>
-let g:NERDTreeDirArrowExpandable = '+'
-let g:NERDTreeDirArrowCollapsible = '-'
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-
-" NERDTree-git-plugin相关设置
-let g:NERDTreeIndicatorMapCustom = {
-			\ "Modified"  : "✹",
-			\ "Staged"    : "✚",
-			\ "Untracked" : "✭",
-			\ "Renamed"   : "➜",
-			\ "Unmerged"  : "═",
-			\ "Deleted"   : "✖",
-			\ "Dirty"     : "✗",
-			\ "Clean"     : "✔︎",
-			\ 'Ignored'   : '☒',
-			\ "Unknown"   : "?"
-			\ }
-let g:NERDTreeShowIgnoredStatus = 1
-
-" ale
-let b:ale_linters = ['pylint']
-let b:ale_fixers = ['autopep8', 'yapf']
-
-" undoTree
-nnoremap <F5> :UndotreeToggle<cr>
-
-" indent-vim
-let g:indent_guides_enable_on_vim_startup = 1
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
-nnoremap <F6> :IndentGuidesToggle<cr>
-
-" vim-javascript
-let g:javascript_plugin_jsdoc = 1
-let g:javascript_plugin_ngdoc = 1
-let g:javascript_plugin_flow = 1
-augroup javascript_folding
-	au!
-	au FileType javascript setlocal foldmethod=syntax
-augroup END
-
-" translate
-vnoremap <leader>fy  :<C-u>Ydv<CR>
-nnoremap <leader>fy :<C-u>Ydc<CR>
-noremap <leader>yd :<C-u>Yde<CR>
-
-" 修改高亮的背景色, 适应主题
-highlight SyntasticErrorSign guifg=white guibg=black
-" to see error location list
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_loc_list_height = 5
-let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_typescript_checkers = ['eslint','tslint']
-function! ToggleErrors()
-	let old_last_winnr = winnr('$')
-	lclose
-	if old_last_winnr == winnr('$')
-		" Nothing was closed, open syntastic error location panel
-		Errors
-	endif
-endfunction
-nnoremap <Leader>s :call ToggleErrors()<cr>
-nnoremap <Leader>sn :lnext<cr>
-nnoremap <Leader>sp :lprevious<cr>
-nnoremap <Leader>si :SyntasticInfo<cr>
-
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-" IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c
-let g:python3_host_prog='/data/data/com.termux/files/usr/bin/python3'
-inoremap <c-c> <ESC>
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" jedi相关配置
-let g:jedi#use_tabs_not_buffers=1
-
-" vim-autoformat
-noremap <F4> :Autoformat<CR>
